@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juego de Piedra, Papel o Tijeras</title>
+</head>
+<body>
+    <h1>Juego de Piedra, Papel o Tijeras</h1>
+    <p>Elige una opción: Piedra, Papel o Tijeras</p>
+    <button id="piedra">Piedra</button>
+    <button id="papel">Papel</button>
+    <button id="tijeras">Tijeras</button>
+    <div id="resultado"></div>
+
+    <script>
+        const opciones = ["piedra", "papel", "tijeras"];
+        const botones = document.querySelectorAll("button");
+        const resultadoDiv = document.getElementById("resultado");
+
+        botones.forEach((boton) => {
+            boton.addEventListener("click", function () {
+                const eleccionUsuario = this.id;
+                const eleccionMaquina = opciones[Math.floor(Math.random() * 3)];
+                const resultado = determinarResultado(eleccionUsuario, eleccionMaquina);
+                resultadoDiv.innerHTML = "La máquina eligió " + eleccionMaquina + "" + resultado
+            });
+        });
+
+        function determinarResultado(usuario, maquina) {
+            if (usuario === maquina) {
+                return "¡Empate!";
+            } else if (
+                (usuario === "piedra" && maquina === "tijeras") ||
+                (usuario === "papel" && maquina === "piedra") ||
+                (usuario === "tijeras" && maquina === "papel")
+            ) {
+                return "¡Ganaste!";
+            } else {
+                return "La máquina gana.";
+            }
+        }
+    </script>
+</body>
+</html>
